@@ -46,8 +46,8 @@ export function setPosition(
         y = Math.round(y);
     }
 
-    if (Math.abs(x - offset.x) > 1) this::showTrack('x');
-    if (Math.abs(y - offset.y) > 1) this::showTrack('y');
+    if (x !== offset.x) this::showTrack('x');
+    if (y !== offset.y) this::showTrack('y');
 
     x = pickInRange(x, 0, limit.x);
     y = pickInRange(y, 0, limit.y);
