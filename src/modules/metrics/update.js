@@ -11,6 +11,10 @@ import {
     setPosition,
 } from '../render/';
 
+import {
+    adjustThumbPosition,
+} from '../track/';
+
 import { getSize } from './get-size';
 
 /**
@@ -159,4 +163,5 @@ function measure() {
 
     // re-positioning
     this::setPosition();
+    this::adjustThumbPosition();
 };
