@@ -1,8 +1,4 @@
 import {
-    setStyle,
-} from '../../helpers/';
-
-import {
     getPrivateProp,
     setPrivateProp,
 } from '../namespace/';
@@ -24,7 +20,6 @@ import { addEvent } from '../utils/';
 export function handleDragEvents() {
     const {
         container,
-        content,
     } = this::getPrivateProp('targets');
 
     let isDraging = false;
@@ -51,10 +46,6 @@ export function handleDragEvents() {
     this::addEvent(container, 'dragstart', (evt) => {
         isDraging = true;
         padding = evt.target.clientHeight;
-
-        setStyle(content, {
-            'pointer-events': 'auto',
-        });
 
         cancelAnimationFrame(animation);
     });

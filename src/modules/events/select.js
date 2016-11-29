@@ -1,8 +1,4 @@
 import {
-    setStyle,
-} from '../../helpers/';
-
-import {
     getPrivateProp,
 } from '../namespace/';
 
@@ -44,12 +40,6 @@ export function handleSelectEvents() {
         });
     };
 
-    const setSelect = (value = '') => {
-        setStyle(container, {
-            '-user-select': value,
-        });
-    };
-
     this::addEvent(window, 'mousemove', (evt) => {
         if (!isSelected) return;
 
@@ -67,8 +57,6 @@ export function handleSelectEvents() {
 
     this::addEvent(window, 'mouseup blur', () => {
         cancelAnimationFrame(animation);
-        setSelect();
-
         isSelected = false;
     });
 
