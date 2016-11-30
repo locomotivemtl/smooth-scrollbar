@@ -64,9 +64,15 @@ export default class SmoothScrollbar {
     get scrollTop() {
         return this.offset.y;
     }
+    set scrollTop(val) {
+        this.setPosition(this.offset.x, val);
+    }
 
     get scrollLeft() {
         return this.offset.x;
+    }
+    set scrollLeft(val) {
+        this.setPosition(val, this.offset.y);
     }
 
     // eslint-disable-next-line spaced-comment
