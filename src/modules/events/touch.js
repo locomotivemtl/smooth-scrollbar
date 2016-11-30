@@ -29,6 +29,7 @@ import { addEvent } from '../utils/';
 
 const MIN_VELOCITY = 100;
 
+// save current active scrollbar instance
 let activeScrollbar = null;
 
 /**
@@ -45,10 +46,12 @@ export function handleTouchEvents() {
         container,
     } = targets;
 
+    const isDeactivated = () => this::getPrivateProp('isDraging') || (activeScrollbar && activeScrollbar !== this);
+
     this::addEvent(container, 'touchstart', (evt) => {
         touchRecord.track(evt);
 
-        if (this::getPrivateProp('isDraging')) return;
+        if (isDeactivated()) return;
 
         const {
             timerID,
@@ -66,10 +69,9 @@ export function handleTouchEvents() {
     this::addEvent(container, 'touchmove', (evt) => {
         touchRecord.update(evt);
 
-        if (this::getPrivateProp('isDraging')) return;
-        if (activeScrollbar && activeScrollbar !== this) return;
+        if (isDeactivated()) return;
 
-        let { x, y } = touchRecord.getCurrentDelta();
+        let { x, y } = touchRecord.getLatestDelta();
 
         if (this::shouldPropagateMovement(x, y)) {
             return this::updateDebounced();
@@ -113,13 +115,15 @@ export function handleTouchEvents() {
         evt.preventDefault();
 
         this::addMovement(x, y, true);
+
+        // activate it!
         activeScrollbar = this;
     });
 
     this::addEvent(container, 'touchcancel touchend', (evt) => {
         touchRecord.release(evt);
 
-        if (this::getPrivateProp('isDraging')) return;
+        if (isDeactivated()) return;
 
         if (touchRecord.isActive()) {
             // still active
@@ -130,7 +134,7 @@ export function handleTouchEvents() {
             speed,
         } = this::getPrivateProp('options');
 
-        const velocity = touchRecord.getLastVelocity();
+        const velocity = touchRecord.getLatestVelocity();
         const movement = {};
 
         Object.keys(velocity).forEach(dir => {

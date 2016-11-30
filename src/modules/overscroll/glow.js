@@ -64,11 +64,7 @@ function _renderGlowX(strength) {
 
     // controll point
     const x = Math.abs(strength);
-    const y = (
-        touchRecord.isActive() ?
-        touchRecord.getCurrentPosition('y') :
-        touchRecord.getLastPosition('y')
-    ) || (height / 2);
+    const y = touchRecord.getLatestPosition('y') || (height / 2);
 
     ctx.globalAlpha = opacity;
     ctx.beginPath();
@@ -102,11 +98,7 @@ function _renderGlowY(strength) {
     const startOffset = pickInRange(opacity, 0, GLOW_MAX_OFFSET) * width;
 
     // controll point
-    const x = (
-        touchRecord.isActive() ?
-        touchRecord.getCurrentPosition('x') :
-        touchRecord.getLastPosition('x')
-    ) || (width / 2);
+    const x = touchRecord.getLatestPosition('x') || (width / 2);
     const y = Math.abs(strength);
 
     ctx.globalAlpha = opacity;
