@@ -46,6 +46,8 @@ export function handleTouchEvents() {
     } = targets;
 
     this::addEvent(container, 'touchstart', (evt) => {
+        touchRecord.track(evt);
+
         if (this::getPrivateProp('isDraging')) return;
 
         const {
@@ -58,16 +60,14 @@ export function handleTouchEvents() {
         if (!this::willOverscroll('x')) movement.x = 0;
         if (!this::willOverscroll('y')) movement.y = 0;
 
-        // start records
-        touchRecord.track(evt);
         this::autoLockMovement();
     });
 
     this::addEvent(container, 'touchmove', (evt) => {
+        touchRecord.update(evt);
+
         if (this::getPrivateProp('isDraging')) return;
         if (activeScrollbar && activeScrollbar !== this) return;
-
-        touchRecord.update(evt);
 
         let { x, y } = touchRecord.getCurrentDelta();
 
@@ -117,9 +117,9 @@ export function handleTouchEvents() {
     });
 
     this::addEvent(container, 'touchcancel touchend', (evt) => {
-        if (this::getPrivateProp('isDraging')) return;
-
         touchRecord.release(evt);
+
+        if (this::getPrivateProp('isDraging')) return;
 
         if (touchRecord.isActive()) {
             // still active
