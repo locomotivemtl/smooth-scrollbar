@@ -42,15 +42,15 @@ export default class SmoothScrollbar {
     // eslint-disable-next-line spaced-comment
     /******************* Alias *******************/
     get targets() {
-        return this::getPrivateProp('targets');
+        return { ...this::getPrivateProp('targets') };
     }
 
     get offset() {
-        return this::getPrivateProp('offset');
+        return { ...this::getPrivateProp('offset') };
     }
 
     get limit() {
-        return this::getPrivateProp('limit');
+        return { ...this::getPrivateProp('limit') };
     }
 
     get containerElement() {
