@@ -8,6 +8,6 @@ export * from './is-one-of';
 export * from './memoize';
 export * from './pick-in-range';
 export * from './set-style';
-export * from './to-array';
+export * from './clone-nodes';
 export * from './touch-record';
 export * from './unique-string';

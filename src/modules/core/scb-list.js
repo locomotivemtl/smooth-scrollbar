@@ -3,13 +3,13 @@ import {
 } from '../../contants/';
 
 import {
-    toArray,
-} from '../../helpers/';
-
-import {
     getPrivateProp,
     setPrivateProp,
 } from '../namespace/';
+
+const {
+    map,
+} = Array.prototype;
 
 class ScrollbarStore {
     constructor() {
@@ -96,7 +96,7 @@ class ScrollbarStore {
         scrollbar::setPrivateProp({
             parents,
             isNestedScrollbar: isNested,
-            children: toArray(content.querySelectorAll(SELECTOR), ::this.get),
+            children: content.querySelectorAll(SELECTOR)::map(::this.get),
         });
     }
 }

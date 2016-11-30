@@ -4,7 +4,7 @@ import {
 
 import {
     apiMixin,
-    toArray,
+    cloneNodes,
 } from './helpers/';
 
 import {
@@ -19,6 +19,10 @@ import {
 import * as APIs from './modules/apis/';
 
 import './style/smooth-scrollbar.styl';
+
+const {
+    map,
+} = Array.prototype;
 
 @apiMixin(APIs)
 export default class SmoothScrollbar {
@@ -98,12 +102,12 @@ export default class SmoothScrollbar {
             <canvas class="overscroll-glow"></canvas>
         `;
 
-        const srcChildNodes = toArray(elem.childNodes);
-        const scrollContent = div.querySelector('.scroll-content');
+        const srcChildNodes = cloneNodes(elem.childNodes);
+        const contentElem = div.querySelector('.scroll-content');
 
-        toArray(div.childNodes).forEach(::elem.appendChild);
+        cloneNodes(div.childNodes).forEach(::elem.appendChild);
 
-        srcChildNodes.forEach(::scrollContent.appendChild);
+        srcChildNodes.forEach(::contentElem.appendChild);
 
         return new SmoothScrollbar(elem, options);
     };
@@ -115,7 +119,7 @@ export default class SmoothScrollbar {
      * @return {SmoothScrollbar[]} - a collection of scrollbar instances
      */
     static initAll(options) {
-        return toArray(document.querySelectorAll(SELECTOR), elem => SmoothScrollbar.init(elem, options));
+        return document.querySelectorAll(SELECTOR)::map(elem => SmoothScrollbar.init(elem, options));
     };
 
     /**

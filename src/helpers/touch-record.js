@@ -1,6 +1,8 @@
-import { toArray } from './to-array';
-
 import { getPointerPosition } from './get-pointer-position';
+
+const {
+    forEach,
+} = Array.prototype;
 
 class Tracker {
     constructor(touch, prevTracker) {
@@ -130,28 +132,16 @@ export class TouchRecord {
         return this.activeTouch !== null;
     }
 
-    track(evt) {
-        const {
-            changedTouches,
-        } = evt;
-
-        toArray(changedTouches).forEach(::this._add);
+    track({ changedTouches }) {
+        changedTouches::forEach(::this._add);
     }
 
-    update(evt) {
-        const {
-            changedTouches,
-        } = evt;
-
-        toArray(changedTouches).forEach(::this._renew);
+    update({ changedTouches }) {
+        changedTouches::forEach(::this._renew);
     }
 
-    release(evt) {
-        const {
-            changedTouches,
-        } = evt;
-
-        toArray(changedTouches).forEach(::this._remove);
+    release({ changedTouches }) {
+        changedTouches::forEach(::this._remove);
     }
 
     updatedRecently() {
