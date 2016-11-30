@@ -1,6 +1,6 @@
 import {
     setStyle,
-    toArray,
+    copyNodes,
 } from '../../helpers/';
 
 import {
@@ -74,7 +74,7 @@ export function destroy(isRemoval) {
         container.scrollTop = container.scrollLeft = 0;
 
         // reset content
-        const childNodes = toArray(content.childNodes);
+        const childNodes = copyNodes(content.childNodes);
 
         container.innerHTML = '';
 

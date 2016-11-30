@@ -4,7 +4,7 @@ import {
 
 import {
     apiMixin,
-    cloneNodes,
+    copyNodes,
 } from './helpers/';
 
 import {
@@ -102,10 +102,10 @@ export default class SmoothScrollbar {
             <canvas class="overscroll-glow"></canvas>
         `;
 
-        const srcChildNodes = cloneNodes(elem.childNodes);
+        const srcChildNodes = copyNodes(elem.childNodes);
         const contentElem = div.querySelector('.scroll-content');
 
-        cloneNodes(div.childNodes).forEach(::elem.appendChild);
+        copyNodes(div.childNodes).forEach(::elem.appendChild);
 
         srcChildNodes.forEach(::contentElem.appendChild);
 
