@@ -81,7 +81,7 @@ export default class SmoothScrollbar {
      * @return {SmoothScrollbar}
      */
     static init(elem, options) {
-        if (!elem || elem.nodeType !== 1) {
+        if (!elem || elem.nodeType !== Node.ELEMENT_NODE) {
             throw new TypeError(`[Scrollbar@init]: expect element to be a DOM Element, but got ${typeof elem}`);
         }
 
