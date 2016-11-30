@@ -85,8 +85,6 @@ export default class SmoothScrollbar {
 
         elem.setAttribute('data-scrollbar', '');
 
-        const childNodes = toArray(elem.childNodes);
-
         const div = document.createElement('div');
 
         div.innerHTML = `
@@ -100,11 +98,12 @@ export default class SmoothScrollbar {
             <canvas class="overscroll-glow"></canvas>
         `;
 
+        const srcChildNodes = toArray(elem.childNodes);
         const scrollContent = div.querySelector('.scroll-content');
 
-        toArray(div.childNodes).forEach((el) => elem.appendChild(el));
+        toArray(div.childNodes).forEach(::elem.appendChild);
 
-        childNodes.forEach((el) => scrollContent.appendChild(el));
+        srcChildNodes.forEach(::scrollContent.appendChild);
 
         return new SmoothScrollbar(elem, options);
     };
@@ -116,9 +115,7 @@ export default class SmoothScrollbar {
      * @return {SmoothScrollbar[]} - a collection of scrollbar instances
      */
     static initAll(options) {
-        return toArray(document.querySelectorAll(SELECTOR), (elem) => {
-            return SmoothScrollbar.init(elem, options);
-        });
+        return toArray(document.querySelectorAll(SELECTOR), elem => SmoothScrollbar.init(elem, options));
     };
 
     /**
@@ -157,7 +154,7 @@ export default class SmoothScrollbar {
      * @param {boolean} [isRemoval] - Whether node is being removd from DOM
      */
     static destroy(elem, isRemoval) {
-        return SmoothScrollbar.has(elem) && SmoothScrollbar.get(elem).destroy(isRemoval);
+        return ScbList.has(elem) && ScbList.get(elem).destroy(isRemoval);
     };
 
     /**
@@ -166,7 +163,7 @@ export default class SmoothScrollbar {
      * @param {boolean} [isRemoval] - Whether node is being removed from DOM
      */
     static destroyAll(isRemoval) {
-        SmoothScrollbar.getAll().forEach(scb => {
+        ScbList.getAll().forEach(scb => {
             scb.destroy(isRemoval);
         });
     };
