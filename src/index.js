@@ -45,6 +45,10 @@ export default class SmoothScrollbar {
         return { ...this::getPrivateProp('targets') };
     }
 
+    get size() {
+        return { ...this::getPrivateProp('size') };
+    }
+
     get offset() {
         return { ...this::getPrivateProp('offset') };
     }
