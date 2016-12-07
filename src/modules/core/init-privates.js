@@ -1,6 +1,5 @@
 import {
     GLOBAL_ENV,
-    PRIVATE_PROPS,
     OVERSCROLL_GLOW,
     OVERSCROLL_BOUNCE,
 } from '../../contants/';
@@ -25,12 +24,6 @@ import {
  */
 export function initPrivates() {
     const scb = this;
-
-    Object.defineProperties(this, {
-        [PRIVATE_PROPS]: {
-            value: {},
-        },
-    });
 
     // private properties
     this::setPrivateProp({

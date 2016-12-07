@@ -1,4 +1,4 @@
-import { PRIVATE_PROPS } from '../../contants/';
+import { getNamespace } from './get-namespace';
 
 /**
  * Get private prop(s)
@@ -7,7 +7,7 @@ import { PRIVATE_PROPS } from '../../contants/';
  * @return {any}
  */
 export function getPrivateProp(prop) {
-    const privateProps = this[PRIVATE_PROPS];
+    const privateProps = this::getNamespace();
 
     if (typeof prop === 'undefined') {
         return privateProps;

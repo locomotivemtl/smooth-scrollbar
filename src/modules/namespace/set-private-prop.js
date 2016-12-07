@@ -1,4 +1,4 @@
-import { PRIVATE_PROPS } from '../../contants/';
+import { getNamespace } from './get-namespace';
 
 /**
  * Define/Update private prop(s) on instance
@@ -8,7 +8,7 @@ import { PRIVATE_PROPS } from '../../contants/';
  * @return {this}
  */
 export function setPrivateProp(prop, value) {
-    const privateProps = this[PRIVATE_PROPS];
+    const privateProps = this::getNamespace();
 
     if (typeof prop === 'object') {
         const src = prop;
