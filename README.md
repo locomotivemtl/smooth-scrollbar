@@ -30,6 +30,8 @@ Smooth scrolling in modern browsers.
       - [scrollbar.limit](#scrollbarlimit)
       - [scrollbar.scrollTop](#scrollbarscrolltop)
       - [scrollbar.scrollLeft](#scrollbarscrollleft)
+      - [scrollbar.wheelReversed](#scrollbarwheelreversed)
+      - [scrollbar.reverseWheel()](#scrollbarreversewheel)
       - [scrollbar.update()](#scrollbarupdate)
       - [scrollbar.getSize()](#scrollbargetsize)
       - [scrollbar.setPosition()](#scrollbarsetposition)
@@ -349,6 +351,33 @@ Alias for `scrollbar.offset.x`:
 console.log(scrollbar.scrollLeft); // 456
 
 console.log(scrollbar.scrollLeft === scrollbar.offset.x); // true
+```
+
+#### scrollbar.wheelReversed
+
+- Type: `boolean`
+
+Whether event `wheel` is reversed:
+
+```js
+console.log(scrollbar.wheelReversed); // true or false
+```
+
+#### scrollbar.reverseWheel()
+
+```js
+scrollbar.reverseWheel(reverse): void
+```
+
+| Param | Type | Description |
+| --- | :-: | --- |
+| `reverse` | boolean | `true` for reverse axis. |
+
+Invert the axis of the `wheel` event.
+
+```js
+scrollbar.reverseWheel(true);
+console.log(scrollbar.reverseWheel); // true
 ```
 
 #### scrollbar.update()
