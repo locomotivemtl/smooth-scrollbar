@@ -24,7 +24,7 @@ function __wheelHandler() {
     }, 30, false);
 
     this.__addEvent(container, GLOBAL_ENV.WHEEL_EVENT, (evt) => {
-        const { options } = this;
+        const { options, wheelReversed } = this;
         let { x, y } = getDelta(evt);
 
         x *= options.speed;
@@ -46,7 +46,11 @@ function __wheelHandler() {
             if (this.__willOverscroll('y', y)) y = 0;
         }
 
-        this.__addMovement(x, y, true);
+        if (wheelReversed) {
+            this.__addMovement(y, x, true);
+        } else {
+            this.__addMovement(x, y, true);
+        }
     });
 };
 

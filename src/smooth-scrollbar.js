@@ -126,6 +126,7 @@ export class SmoothScrollbar {
         });
 
         this.__initOptions(options);
+        this.__initReverseWheel();
         this.__initScrollbar();
 
         // storage
