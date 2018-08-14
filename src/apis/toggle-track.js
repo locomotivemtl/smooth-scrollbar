@@ -11,11 +11,6 @@ const ACTIONS = {
     HIDE: 1,
 };
 
-const CLASS_NAMES = {
-    TRACK: 'show',
-    CONTAINER: 'scrolling',
-};
-
 const METHODS = {
     [ACTIONS.SHOW]: 'add',
     [ACTIONS.HIDE]: 'remove',
@@ -30,6 +25,11 @@ function toggleTrack(action = ACTIONS.SHOW) {
      * @param {String} direction: which direction of tracks to show/hide, default is 'both'
      */
     return function (direction = 'both') {
+        const CLASS_NAMES = {
+            TRACK: 'show',
+            CONTAINER: 'scrolling',
+        };
+
         const {
             options,
             movement,
