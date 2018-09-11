@@ -22,7 +22,7 @@ function matchSomeRules(str, rules) {
 function manageEvents(action = ACTIONS.REGIESTER) {
     const method = METHODS[action];
 
-    return function (...rules) {
+    return function (ACTIONS, ...rules) {
         this.__handlers.forEach((handler) => {
             const {
                 elem,
