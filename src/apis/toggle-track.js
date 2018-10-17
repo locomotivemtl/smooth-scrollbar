@@ -19,6 +19,8 @@ const METHODS = {
 function toggleTrack(action = ACTIONS.SHOW) {
     const method = METHODS[action];
 
+    const utils = { ACTIONS };
+
     /**
      * toggle scrollbar track on given direction
      *
@@ -44,7 +46,7 @@ function toggleTrack(action = ACTIONS.SHOW) {
         }
 
         // keep showing
-        if (options.alwaysShowTracks && action === ACTIONS.HIDE) return;
+        if (options.alwaysShowTracks && action === utils.ACTIONS.HIDE) return;
 
         direction = direction.toLowerCase();
 
